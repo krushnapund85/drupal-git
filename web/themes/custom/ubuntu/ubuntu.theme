@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * ubuntu theme file.
+ */
+
+/**
+ * Implements hook_facetapi_facet_info_alter().
+ */
+function facets_facetapi_facet_info_alter(array &$facet_info, array $searcher_info) {
+
+
+  $facet_info['bundle']['alter callbacks'][] = 'facets_strip_facet_count';
+}
+
+/**
+ * Facet API "alter callback" that sets the count to NULL so that it is not
+ * displayed when the facet is rendered.
+ */
+function facets_strip_facet_count(&$build, FacetapiAdapter $adapter, array $facet) {
+  foreach ($build as $facet_name => $facet_data) {
+    $build[$facet_name]['#count'] = NULL;
+  }
+}

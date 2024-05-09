@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations and general functionality for WhatsApp module.
+ */
+
+/**
+ * Implements hook_cron().
+ */
+function whatsapp_cron() {
+  $config = \Drupal::config('whatsapp.settings');
+  if (!$config->get('external_library_cache')) {
+    return;
+  }
+  $request_time = \Drupal::time()->getRequestTime();
+  /** @var \Drupal\whatsapp\JavascriptLocalCache $javascript_service */
+  $javascript_service = \Drupal::service('whatsapp.javascript_cache');
+  /** @var \Drupal\key\KeyRepositoryInterface $key_repository */
+  $key_repository = \Drupal::service('key.repository');
+
+  $widget_key = $config->get('widget_key');
+  $key = $key_repository->getKey($widget_key)->getKeyValue();
+
+  if ($request_time - \Drupal::state()->get('whatsapp.last_cache') >= 86400) {
+    $javascript_service->fetchWhatsappJavascript($key, TRUE);
+    \Drupal::state()->set('whatsapp.last_cache', $request_time);
+  }
+}

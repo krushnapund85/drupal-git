@@ -1,0 +1,4 @@
+services:
+  whatsapp.javascript_cache:
+      class: Drupal\whatsapp\JavascriptLocalCache
+      arguments: ['@file_url_generator', '@http_client', '@file_system', '@config.factory', '@logger.factory']

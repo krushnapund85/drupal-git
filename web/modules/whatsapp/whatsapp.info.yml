@@ -1,0 +1,12 @@
+type: module
+name: Drupal WhatsApp
+description: 'Allows sending WhatsApp messages to users of this popular messaging service.'
+core_version_requirement: ^8.9 || ^9 || ^10
+
+dependencies:
+  - key:key
+
+# Information added by Drupal.org packaging script on 2023-06-19
+version: '1.0.3'
+project: 'whatsapp'
+datestamp: 9579724221
