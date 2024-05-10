@@ -1,6 +1,5 @@
 Then I tried pushing local project on to this repository.
-
-mkdir drupal-git
+mkdir drupal-git<br>
 cd drupal-git/
 git init
 git add .
